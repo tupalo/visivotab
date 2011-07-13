@@ -36,7 +36,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0px 0px 5px #000;
     opacity:0;
-    -webkit-transition: opacity ease-in-out 1s;
+    -webkit-transition: opacity ease-in-out 0.5s;
   }
   
   #apps {
@@ -74,12 +74,8 @@ var getAllCallback = function(list) {
                         chrome.management.launchApp(ext.id);
                     };
                 })(extInf));
-                var name = document.createElement("div");
-                name.className = "name";
-                name.textContent = extInf.name;
                 app.className = "app";
                 app.appendChild(img);
-                app.appendChild(name);
                 apps.appendChild(app);
             }
         }
