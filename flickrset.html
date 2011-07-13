@@ -109,6 +109,10 @@ window.addEventListener("DOMContentLoaded", function() {
     document.body.style.backgroundSize = "cover";
     var byline = document.getElementById("wrapper");
     byline.href = 'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
+    var link = document.createElement("link");
+    link.rel = "canonical";
+    link.src = byline.href;
+    document.head.appendChild(link);
  
     
     gapi.plusone.go();
