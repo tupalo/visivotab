@@ -116,13 +116,11 @@ window.addEventListener("DOMContentLoaded", function() {
     hrefAttr.nodeValue = byline.href;
     plusone.setAttributeNode(sizeAttr);
     plusone.setAttributeNode(hrefAttr);
-    
-    var script = document.createElement("script");
-    script.src = "https://apis.google.com/js/plusone.js";
-    script.type = "text/javascript";
+
     var realbyline = document.getElementById("byline");
     realbyline.appendChild(plusone);
-    realbyline.appendChild(script);
+    
+    gapi.plusone.go();
     
     if (false && localStorage['showTitle']) {
         var title = document.createElement("span");
@@ -170,6 +168,9 @@ window.addEventListener("DOMContentLoaded", function() {
     <body>
         <div id="byline">
           <a href="#" id="wrapper"></a>
+          <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {parsetags: 'explicit'}
+</script>
         </div>
         <div id="container"><div id="apps"> </div></div>
     </body>
