@@ -3,8 +3,8 @@
 <style>
   #byline {
     position: absolute;
-    bottom: 3%;
-    left: 3%;
+    top: 10px;
+    right: 10px;
   }
   #wrapper {
     background-color: #EEE;
@@ -35,16 +35,17 @@
     top: 10px;
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0px 0px 5px #000;
+    opacity:0;
+    -webkit-transition: opacity ease-in-out 1s;
   }
   
   #apps {
-    opacity: 0;
     height: 100%;
     color: white;
     font-family: Arial;
   }
   
-  #container:hover #apps {
+  #container:hover {
     opacity: 1;
   }
   
@@ -80,11 +81,6 @@ var getAllCallback = function(list) {
                 app.appendChild(img);
                 app.appendChild(name);
                 apps.appendChild(app);
-                if (counter % 2) {
-                    var row = document.createElement("br");
-                    apps.appendChild(row);
-                }
-                counter++;
             }
         }
     };
