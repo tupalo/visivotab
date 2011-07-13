@@ -109,6 +109,17 @@ window.addEventListener("DOMContentLoaded", function() {
     document.body.style.backgroundSize = "cover";
     var byline = document.getElementById("wrapper");
     byline.href = 'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
+    var plusone = document.createElement("g:plus");
+    var sizeAttr = document.createAttribute("size")
+    sizeAttr.nodeValue = "tall";
+    plusone.addAttribute(sizeAttr);
+    var hrefAttr = document.createAttribute("href")
+    hrefAttr.nodeValue = "tall";
+    plusone.setAttributeNode(sizeAttr);
+    plusone.setAttributeNode(hrefAttr);
+    var realbyline = document.getElementById("byline");
+    realbyline.appendChild(plusone);
+    
     if (false && localStorage['showTitle']) {
         var title = document.createElement("span");
         title.setAttribute("class", "title");
@@ -155,6 +166,9 @@ window.addEventListener("DOMContentLoaded", function() {
     <body>
         <div id="byline">
           <a href="#" id="wrapper"></a>
+          <!-- Place this tag in your head or just before your close body tag -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
         </div>
         <div id="container"><div id="apps"> </div></div>
     </body>
