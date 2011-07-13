@@ -109,14 +109,8 @@ window.addEventListener("DOMContentLoaded", function() {
     document.body.style.backgroundSize = "cover";
     var byline = document.getElementById("wrapper");
     byline.href = 'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
-    var plusone = document.createElement("g:plus");
-    var sizeAttr = document.createAttribute("size")
-    sizeAttr.nodeValue = "tall";
-    var hrefAttr = document.createAttribute("href")
-    hrefAttr.nodeValue = byline.href;
-    plusone.setAttributeNode(sizeAttr);
-    plusone.setAttributeNode(hrefAttr);
-
+ 
+ 
     var realbyline = document.getElementById("byline");
     realbyline.appendChild(plusone);
     
@@ -171,6 +165,7 @@ window.addEventListener("DOMContentLoaded", function() {
           <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
   {parsetags: 'explicit'}
 </script>
+         <div class="g-plusone" data-size="standard" data-count="true"></div>
         </div>
         <div id="container"><div id="apps"> </div></div>
     </body>
