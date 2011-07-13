@@ -111,7 +111,7 @@ window.addEventListener("DOMContentLoaded", function() {
     byline.href = 'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
     var link = document.createElement("link");
     link.rel = "canonical";
-    link.src = byline.href;
+    link.href = byline.href;
     document.head.appendChild(link);
  
     
