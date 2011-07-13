@@ -8,7 +8,8 @@
   "background_page": "background.html",
   "permissions": [
     "http://api.flickr.com/",
-    "tabs"
+    "tabs",
+    "management"
   ],
   "icons": {"48": "adetab_48.jpg",
             "128": "adetab_128.jpg"}

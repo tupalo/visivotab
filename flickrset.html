@@ -1,5 +1,5 @@
-<head>
-<title>New Tab</title>
+<html>
+<head> <title> New Tab </title>
 <style>
   #byline {
     position: absolute;
@@ -26,68 +26,125 @@
   span.owner {
     font-size: small;
   }
-</style>
-</head>
-<body>
-  <div id="byline">
-    <a href="#" id="wrapper">
-    </a>
-  </div>
+  
+  #container {
+    float: left;
+    width: 30%;
+  }
+  
+  #apps {
+    opacity: 0;
+  }
+  
+  #container:hover #apps {
+    opacity: 1;
+  }
+  
+</style > 
+
 <script>
-  var cachedImages = JSON.parse(localStorage["photoCache"]);
-  var whichImage = Math.round(Math.random() * (cachedImages.length - 1));
-  var cached = cachedImages[whichImage];
-
-  document.body.style.backgroundImage = "url(" + cached.src + ")";
-  document.body.style.backgroundSize = "cover";
-
-  var byline = document.getElementById("wrapper");
-  byline.href =
-    'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
-
-  if (false && localStorage['showTitle']) {
-    var title = document.createElement("span");
-    title.setAttribute("class", "title");
-    if (cached.title) {
-      var escapedTitle = cached.title.replace(
-        '&', '&amp;').replace(
-        '<', '&lt;').replace(
-        '>', '&gt;');
-      title.innerHTML = escapedTitle;
-    } else {
-      title.innerHTML = "untitled";
+var getAllCallback = function(list) {
+        var apps = document.getElementById("apps");
+        var counter = 0;
+        for (var i in list) {
+            // we don't want to do anything with extensions yet.
+            var extInf = list[i];
+            if (extInf.isApp && extInf.enabled) {
+                var app = document.createElement("div");
+                var img = new Image();
+                img.className = "image";
+                img.src = find128Image(extInf.icons);
+                img.addEventListener("click", (function(ext) {
+                    return function() {
+                        chrome.management.launchApp(ext.id);
+                    };
+                })(extInf));
+                var name = document.createElement("div");
+                name.className = "name";
+                name.textContent = extInf.name;
+                app.className = "app";
+                app.appendChild(img);
+                app.appendChild(name);
+                apps.appendChild(app);
+                if (counter % 2) {
+                    var row = document.createElement("br");
+                    apps.appendChild(row);
+                }
+                counter++;
+            }
+        }
+    };
+    
+var find128Image = function(icons) {
+        for (var icon in icons) {
+            if (icons[icon].size == "128") {
+                return icons[icon].url;
+            }
+        }
+        return "/noicon.png";
+    };
+    
+var loadApps = function() {
+        chrome.management.getAll(getAllCallback);
+    };
+    
+window.addEventListener("DOMContentReady", function() {
+    loadApps();
+    
+    var cachedImages = JSON.parse(localStorage["photoCache"]);
+    var whichImage = Math.round(Math.random() * (cachedImages.length - 1));
+    var cached = cachedImages[whichImage];
+    document.body.style.backgroundImage = "url(" + cached.src + ")";
+    document.body.style.backgroundSize = "cover";
+    var byline = document.getElementById("wrapper");
+    byline.href = 'http://www.flickr.com/photos/' + cached.owner + '/' + cached.id;
+    if (false && localStorage['showTitle']) {
+        var title = document.createElement("span");
+        title.setAttribute("class", "title");
+        if (cached.title) {
+            var escapedTitle = cached.title.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+            title.innerHTML = escapedTitle;
+        }
+        else {
+            title.innerHTML = "untitled";
+        }
+        byline.appendChild(title);
+        if (localStorage['showOwner']) {
+            var owner = document.createElement("span");
+            owner.setAttribute("class", "owner");
+            var escapedOwnername = cached.ownername.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+            owner.innerHTML = " by " + escapedOwnername;
+            byline.appendChild(owner);
+        }
     }
-    byline.appendChild(title);
-
-    if (localStorage['showOwner']) {
-      var owner = document.createElement("span");
-      owner.setAttribute("class", "owner");
-      var escapedOwnername = cached.ownername.replace(
-        '&', '&amp;').replace(
-        '<', '&lt;').replace(
-        '>', '&gt;');
-      owner.innerHTML = " by " + escapedOwnername;
-      byline.appendChild(owner);
+    else {
+        byline.innerHTML = "view in photostream";
     }
-  } else {
-    byline.innerHTML = "view in photostream";
-  }
-
-  window.onbeforeunload = function () {
-    document.body.onmousemove = null;
-  }
-
-  window.setTimeout(function () {
-    var mouseX = 0;
-    document.body.onmousemove = function (evt) {
-      if (mouseX == 0) {
-        mouseX = evt.pageX;
-      }
-      if (!mouseX != evt.pageX) {
-        byline.style.opacity = 0.6;
+    window.onbeforeunload = function() {
         document.body.onmousemove = null;
-      }
     }
-  }, 200);
+    window.setTimeout(function() {
+        var mouseX = 0;
+        document.body.onmousemove = function(evt) {
+            if (mouseX == 0) {
+                mouseX = evt.pageX;
+            }
+            if (!mouseX != evt.pageX) {
+                byline.style.opacity = 0.6;
+                document.body.onmousemove = null;
+            }
+        }
+    }, 200);
+}, false); 
+
 </script>
-</body>
+
+
+</head> 
+    <body>
+        <div id="byline">
+          <a href="#" id="wrapper"></a>
+        </div>
+        <div id="container"><div id="apps"> </div></div>
+    </body>
+</html>
