@@ -88,7 +88,7 @@ var loadApps = function() {
         chrome.management.getAll(getAllCallback);
     };
     
-window.addEventListener("DOMContentReady", function() {
+window.addEventListener("DOMContentLoaded", function() {
     loadApps();
     
     var cachedImages = JSON.parse(localStorage["photoCache"]);
