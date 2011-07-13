@@ -28,18 +28,21 @@
   }
   
   #container {
-    float: left;
-    width: 30%;
+    position: absolute;
+    left: 0;
+    right: 30%;
+    bottom: 0;
   }
   
   #apps {
     opacity: 0;
+    overflow: scroll;
+    height: 100%;
   }
   
   #container:hover #apps {
     opacity: 1;
-    overflow: scroll;
-    height: 100%;
+    
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0px 0px 5px #000;
   }
