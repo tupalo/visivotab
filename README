@@ -4,3 +4,8 @@ VisivoTab
 This is a little chrome extension I made to showcase visivo on Flickr's photos.
 
 Open sourcing the code because I've received some offers of patches.
+
+
+// ViennaTab: 
+  Forked the version from Paul Kinlan into https://github.com/tupalo/visivotab
+  ..and changed the group to the Vienna Group (and did some minor changes to the code)

@@ -1,7 +1,7 @@
 {
-  "name": "AdeTab",
+  "name": "ViennaTab",
   "version": "1.3",
-  "description": "Beautiful photos hand-selected by Flickr's adewale_oshineye for your New Tab",
+  "description": "Photos from the Vienna Flickr Group",
   "chrome_url_overrides": {
     "newtab": "flickrset.html"
   },
@@ -11,6 +11,6 @@
     "tabs",
     "management"
   ],
-  "icons": {"48": "adetab_48.jpg",
-            "128": "adetab_128.jpg"}
+  "icons": {"48": "viennatab_48.jpg",
+            "128": "viennatab_128.jpg"}
 }
